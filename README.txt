@@ -1,1 +1,0 @@
-This repository is a collection of my labs and other homework assignments produced for my Computational Biology course at the University of Colorado.
