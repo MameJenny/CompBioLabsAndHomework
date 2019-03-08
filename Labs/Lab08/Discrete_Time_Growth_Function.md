@@ -1,5 +1,5 @@
 ﻿# Discrete Time Logistic Growth Model Function for R
-This function can be accessed using the [following R script]("MADSEN_Lab08.R"): 
+This function can be accessed using the [following R script](MADSEN_Lab08.R): 
 >discreteTime <- function(r,K,t,n) {
 for(i in 2:t) {  
   n[c(i)] <- (n[i-1] + (r * n[i-1] * ((K - n[i-1]) / K)))  
