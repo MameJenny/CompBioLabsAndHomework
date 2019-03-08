@@ -38,26 +38,26 @@ This will produce a plot as shown:
 ### Modifying your discreteTime data
 #### 1. Producing a CSV file
 If you need to save your population growth data as a data matrix of abundance per generation, first set your working directory with `setwd()`, then add the following code after the function: 
-> myAbundance <- discreteTime(r, K, t, n) 
-> write.csv(myAbundance, file = "DiscreteData_Lab08.csv", row.names = FALSE)
+> myAbundance <- discreteTime(r, K, t, n)   
+> write.csv(myAbundance, file = "DiscreteData_Lab08.csv", row.names = FALSE)  
 
 ####  2. Modifying your plot
 The function contains a plot with a pre-set design, which will print to the R console. The following values can be altered to produce a custom graph: 
 >  plot( 1:t, n,  
-        main="Population Growth According to Discrete Time Equation", # title
-        ylab = "Population size",  # y axis label
-        xlab= "Number of generations",  # x axis label
-        cex = 1.0, # size of data points
-        pch = 19, # type of data point
-        col = "red"  # data point color
-  )
+        main="Population Growth According to Discrete Time Equation", # title  
+        ylab = "Population size",  # y axis label  
+        xlab= "Number of generations",  # x axis label  
+        cex = 1.0, # size of data points  
+        pch = 19, # type of data point  
+        col = "red"  # data point color  
+  )  
  #### 3. Saving your plot to disk 
  If you wish to save your plot from the R console to the disk, the following code can be used: 
- > myAbundance <- discreteTime(r, K, t, n) 
- > png(filename="discretePlot.png")
-plot ( myAbundance
-)
-dev.off()
+ > myAbundance <- discreteTime(r, K, t, n)  
+ > png(filename="discretePlot.png")  
+plot ( myAbundance  
+)  
+dev.off()  
 
 The plot saved using this method can also be modified as shown in part 2.  
 
