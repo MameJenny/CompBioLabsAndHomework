@@ -1,22 +1,22 @@
 ﻿# Discrete Time Logistic Growth Model Function for R
 This function can be accessed using the [following R script]("MADSEN_Lab08.R"): 
 >discreteTime <- function(r,K,t,n) {
-for(i in 2:t) {
-  n[c(i)] <- (n[i-1] + (r * n[i-1] * ((K - n[i-1]) / K))) 
-}
-  Abundance <- n
-  Generations <- c(1:t)
-  discreteMatrix <- cbind(Generations,Abundance)
+for(i in 2:t) {  
+  n[c(i)] <- (n[i-1] + (r * n[i-1] * ((K - n[i-1]) / K)))  
+}  
+  Abundance <- n  
+  Generations <- c(1:t)  
+  discreteMatrix <- cbind(Generations,Abundance)  
   plot( 1:t, n,  
-        main="Population Growth According to Discrete Time Equation", 
-        ylab = "Population size", 
-        xlab= "Number of generations", 
-        cex = 1.0, 
-        pch = 19, 
-        col = "red"  
-  )
-  return(discreteMatrix) # returns population data, and a plot of population size as a function of number of generations
-}
+        main="Population Growth According to Discrete Time Equation",  
+        ylab = "Population size",   
+        xlab= "Number of generations",   
+        cex = 1.0,   
+        pch = 19,   
+        col = "red"    
+  )  
+  return(discreteMatrix) # returns population data, and a plot of population size as a function of number of generations  
+}  
 
 ### How discreteTime works:  
 This function applies the [discrete time logistic growth equation](https://vlab.amrita.edu/?sub=3&brch=65&sim=1110&cnt=1) to a given starting population:
