@@ -1,6 +1,6 @@
 ﻿# Discrete Time Logistic Growth Model Function for R
 This function can be accessed using the [following R script](MADSEN_Lab08.R): 
->discreteTime <- function(r,K,t,n) {
+>discreteTime <- function(r,K,t,n) {  
 for(i in 2:t) {  
   n[c(i)] <- (n[i-1] + (r * n[i-1] * ((K - n[i-1]) / K)))  
 }  
@@ -32,7 +32,7 @@ This function applies the [discrete time logistic growth equation](https://vlab.
 To apply the function to given population data, the following numerical values must be provided, in order: r, K, t, and n. The function can be called using the following general setup: 
 > discreteTime(r, K, t, n) 
 
-This will produce a plot as shown: 
+This will produce a plot as shown above.
 ![Sample plot](https://i.imgur.com/Im5iuBi.png)
 
 ### Modifying your discreteTime data
