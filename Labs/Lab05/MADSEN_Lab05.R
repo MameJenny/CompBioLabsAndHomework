@@ -21,22 +21,24 @@ NewVector <- Step2Data
     NewVector$x[i] <- NA
   }
 }
-print(NewVector)
 
 # step 2.b: replacing previously created NA values with NaN using vectorized code
 
 is.na(NewVector) # checks for NA values (true/false)
 
 NewVector[is.na(NewVector)] <- NaN # convers NA to NaN in NewVector
-print(NewVector)
+
 
 # step 2.c: using a which statement and indexing, replacing previously created NaN values with 0
 
 is.nan.data.frame <- function(x)
   do.call(cbind, lapply(x, is.nan)) # making is.nan work correctly on a data frame
 
-NewVector[is.nan(NewVector)] <- 0 # converting NaN to 0
+NewVector$x[which(is.nan(NewVector$x))] <- 0 # converting NaN to 0
 print(NewVector)
+
+# SMF: to use the which statement, you could do:
+# SMF: NewVector$x[which(is.nan(NewVector$x))] <- 0
 
 # step 2.d: seeing how many values fall between 50 and 100
 
@@ -45,10 +47,7 @@ Count <- length(NumbersFifty100)  # number of values in NumbersFifty100
 UpperLimit <- 100 # upper limit for this test
 LowerLimit <- 50 # lower limit for this test
 
-FiftyToOneHundred <- rep(0, Count) # empty vector for use in next step
-
-FiftyToOneHundred <- NewVector$x[NewVector$x < UpperLimit & NewVector$x > LowerLimit]
-print(FiftyToOneHundred)
+FiftyToOneHundred <- NewVector$x[NewVector$x < UpperLimit & NewVector$x > LowerLimit] # creates a vector of all values between 50 and 100
 
 write.csv(x = FiftyToOneHundred, file = "FiftyToOneHundred.csv") # creating a csv with above data
 
@@ -67,7 +66,7 @@ print(FirstGasNonZero) # shows that the first year was 1885
 YearsBetween200_300 <- which(Step3Data$Total > 200 & Step3Data$Total < 300) # indicates that 9 years, between position 129 and 137, were between 200 and 300 tons
 print(YearsBetween200_300)
 
-YearRowValues <- YearsBetween200_300[1:9] # the row values in which above condition is met
+YearRowValues <- YearsBetween200_300 # the row values in which above condition is met
 
 YearsBetween200_300 <- Step3Data$Year[YearRowValues]
 print(YearsBetween200_300) # shows that emissions were between 200 and 300 million metric tons between 1879 and 1887
@@ -75,7 +74,7 @@ print(YearsBetween200_300) # shows that emissions were between 200 and 300 milli
 #---Part II
 #
 # step 1: creating needed vectors
-totalGenerations <- 1000
+totalGenerations <- 1000 # number of generations
 initPrey <- 100 	# initial prey abundance at time t = 1
 initPred <- 10		# initial predator abundance at time t = 1
 a <- 0.01 		# attack rate
@@ -91,11 +90,11 @@ for(i in 2:totalGenerations) {
   p[i] <- (p[i-1] + ( k * a * n[i-1] * p[i-1] ) - ( m * p[i-1] )) # applies equation to p
   if (n[i] < 0) {
     n[i] <- 0  
-  } else if (p[i] < 0 ) { # these if statements remove values less than 0 and replace them with 0 
+  } 
+  if (p[i] < 0 ) { # these if statements remove values less than 0 and replace them with 0 
     p[i] <- 0 
   }
 }
-
 
 
 # creating a plot of predator/prey abundance over time
@@ -106,21 +105,23 @@ plot( t, n,
      ylim = c(1,1000), # y axis numeric limit
      xlim = c(1,1000), # x axis numeric limit
      cex = 0.5, # size of data points
-     col = "darkblue"  # data point color
+     col = "red"  # data point color
      )
 # adding lines for predator abundance
 lines(t, p,
-      lwd = 2.0,
+      lwd = 3.0,
       ) 
 # adding a legend to the graph
 legend( "topright", legend=c("Prey abundance", "Predator abundance"), # names
         lty = 1.0, # line type
         lwd = 2.0, # line width
-        col = c("darkblue", "black") # colors
+        col = c("red", "black") # colors in legend
         ) 
 
 # creating a matrix of results from equation
-column_names <- c("TimeStep","PreyAbundance","PredatorAbundance") # creating a vector for column names
-myResults <- matrix (0:0, nrow = totalGenerations, ncol = 3 ) # creating a matrix with row number = totalGenerations and 3 columns
-colnames(myResults) = column_names # changing matrix column names
-myResults[,1] <- t ; myResults[,2] <- n ; myResults[,3] <- p # filling the columns of the matrix with data from previous steps
+myResults <- cbind(t, n, p) # creating a matrix with 3 columns using above predator/prey data
+colnames(myResults) <- c("TimeStep","PreyAbundance","PredatorAbundance")  # changing matrix column names
+
+setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/Labs/Lab07")
+write.csv(myResults, file = "myResults.csv", row.names = FALSE)
+
