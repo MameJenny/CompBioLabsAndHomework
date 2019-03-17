@@ -5,15 +5,15 @@
 # area of a triangle: 0.5 * base * height
 
 # creating a function to use this equation given height and base data
-triangleArea <- function(a,b)  { # calculate the area of a triangle by multiplying 0.5 * base * height; base and height numerical values must be given
-  area <- (( base * height ) * 0.5) # multiply (base times height) times 0.5
+triangleArea <- function(r,t)  { # calculate the area of a triangle by multiplying 0.5 * base * height; base and height numerical values must be given
+  area <- (( r * t ) * 0.5) # multiply (base times height) times 0.5
   return ( area ) # returns area of the triangle
 }
 
-base <- 10 # sample triangle base value
-height <- 9 # sample triangle height value
 
-triangleArea() # testing the above function using sample height/base numbers
+triangleArea(10,9) # testing the above function using sample height/base numbers
+
+
 
 # Problem 2: creating a function to return the absolute value of a given number 
 myAbs <- function(o) { # myAbs displays the positive, absolute value of a given number
@@ -31,51 +31,52 @@ myAbs <- function(o) { # myAbs displays the positive, absolute value of a given 
  
  myAbsVector <- function(testVector, threshold = 0 ) { # myAbsvector displays the positive, absolute value of a given number if the numbers are in a numeric vector
    for (i in 1:length(testVector)) { # for a vector of 1 to length of the test vector
-   if ( testVector[i] > 0) { # if given sum is greater than 0,
+    if ( testVector[i] > 0) { # if given sum is greater than 0,
      testVector[i] <- ( testVector[i] ) # return the number in position i, already greater than 0 
    }  else { # or else, if the sum is less than 0, 
      testVector[i] <- ( testVector[i] * -1) # return the number in position i multiplied by -1
    }
-   }
+  }
    return (testVector) # return the vector of absolute values
  } 
  
  myAbsVector(testVector) # prints positive absolute values of testVector
  
+ 
  # Problem 3
 
  fibo <- function(a, b) {
-   Fibonacci <- rep(0,20) # creating an empty vector with 20 values for storing data
-     Fibonacci[c(1,1)] <- a # assigning first two Fibonacci numbers
-     Fibonacci[c(2,2)] <- a
-   greaterThan <- rep(0,17) # creating a vector for fibonacci values greater than b
+   Fibonacci <- c(0,length(b)) # creating an empty vector with 20 values for storing data
+     Fibonacci[c(1,1)] <- a # assigning first number to be a, chosen by user
+     Fibonacci[c(2,2)] <- 1 # assigning second Fibonacci number
+     error_msg <- print("Error: Number of requested values cannot be less than 2!")
    for ( i in 3:length(Fibonacci) ) { # creates a vector of the fibonacci sequence 
      Fibonacci[c(i)] <- (Fibonacci[(i - 2)] + Fibonacci[(i - 1)]) # to the position i in Fibonacci vector, assign the sum of number in i-1 plus number in i-2
-     if (Fibonacci[i] >= b ) { # for values created with above equation, checks to see if they are equal to or greater than user-entered value b 
-     greaterThan[i] <- Fibonacci[i] # saves values >= b to a vector
-     }
    } 
-   return(greaterThan) # returns a vector of numbers >= b
+   if (b < 2 ) {
+     print(error_msg) # this if statement returns an error message if the number chosen for "b" is less than 2
+  # returns a vector of numbers >= b
+   return(Fibonacci)
+ }
+ fibo(1, 3)
+ 
+ myFibo <- function(init, length_int) {
+   fibo_data <- rep(0, length_int) # creates an empty vector of requested length
+   error_msg <- c("Error: Number of requested values cannot be fractional or less than 3!")
+   if(length_int > 2 && length_int == round(length_int)) { # if requested number is greater than 2 and an integer, return fibonacci sequence
+   fibo_data[c(1,1)] <- init # starting number chosen by user
+   fibo_data[c(2,2)] <- 1 # second number of Fibonacci sequence (must be 1)
+   for ( i in 3:length_int ) { # creates a vector of the fibonacci sequence 
+     fibo_data[c(i)] <- (fibo_data[(i - 2)] + fibo_data[(i - 1)]) # to the position i in Fibonacci vector, assign the sum of number in i-1 plus number in i-2
+    } 
+   return(fibo_data)
+   } else { # if requested number of values is a fraction or less than 3, return an error message
+      print(error_msg)
+  }
  }
  
-
- fibo(1,0) # testing fibonacci function
+ myFibo(0,25)
  
- fibo <- function(a, b) {
-   Fibonacci <- rep(0,20) # creating an empty vector with 20 values for storing data
-   Fibonacci[c(1,1)] <- a # assigning first two Fibonacci numbers
-   Fibonacci[c(2,2)] <- a
-   greaterThan <- rep(0,17) # creating a vector for fibonacci values greater than b
-   for ( i in 3:length(Fibonacci) ) { # creates a vector of the fibonacci sequence 
-     Fibonacci[c(i)] <- (Fibonacci[(i - 2)] + Fibonacci[(i - 1)]) # to the position i in Fibonacci vector, assign the sum of number in i-1 plus number in i-2
-     if (Fibonacci[i] >= b ) { # for values created with above equation, checks to see if they are equal to or greater than user-entered value b 
-       greaterThan[i] <- Fibonacci[i] # saves values >= b to a vector
-     }
-   }
-    return(greaterThan) # returns a vector of numbers >= b
-  }
- fibo(1,3) # testing fibonacci function
-
 # ---Problem 4
 # 4.a
  difference_sq <- function(x, y) { # takes the difference of values a and b and squares them
@@ -99,7 +100,7 @@ myAbs <- function(o) { # myAbs displays the positive, absolute value of a given 
  # importing lab 07 data to test above function
  DataLab07 <- read.csv("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/Labs/Lab07/DataForLab07.csv")
 
- DataLab07_vector <- as.vector(DataLab07$x) # saving above data as a vector instead of a data frame
+  DataLab07_vector <- as.vector(DataLab07$x) # saving above data as a vector instead of a data frame
  averageArithmetic(DataLab07_vector) # average value of 108.9457
  
  # - 4.c
@@ -108,6 +109,5 @@ myAbs <- function(o) { # myAbs displays the positive, absolute value of a given 
    sum_sq <- sum((z - averageArithmetic(z))^2)
    return(sum_sq) # returns result of above calculation
  }
-
- sumSquare(DataLab07_vector) # testing sumSquare on the above lab data vector
  
+sumSquare(DataLab07_vector) # testing sumSquare on the above lab data vector
