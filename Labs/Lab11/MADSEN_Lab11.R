@@ -1,5 +1,10 @@
 #---- Lab 11 -----
 #
+#
+# -- Installing packages
+library("ggplot2")
+library("tidyverse")
+install.packages("dplyr")
 # -- part 1
 # uploading csv
 densityData <- read.csv("C://Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/Labs/Lab11/GlobalWoodDensityDatabase.csv", stringsAsFactors = F)
@@ -11,11 +16,6 @@ naRow <- which(is.na(densityData$Wood_Density))
 #
 # removing the NA
 densityData <- densityData[-naRow, ]
-# taking mean for each species
-
-# trying to use aggregate() and mean 
-by_groups <- aggregate(densityData[, 2:4], list(densityData$Family), mean)
-head(by_groups)
 
 # using summarise_at() and group_by() to make a new table with mean density for each species
 tbl_by_groups <- densityData %>%
@@ -36,15 +36,34 @@ print(most_dense)
 
 # making a box plot of most dense species 
 
-most_dense_rows <- (density_low_to_high$Family %in% most_dense_families)
-cat(paste("\ Densest species = ", sum(most_dense_rows), "\n"))
-most_dense_families <- density_low_to_high[most_dense_rows, ]
 
-top_density_plot_data <- as.data.frame(most_dense_families)
+top_families_plot <- ggplot(most_dense, aes(x = Family, y = Wood_Density, color = Family)) + 
+  geom_boxplot() 
 
-top_plot <- ggplot(top_density_plot_data, aes(x = Family, y = Wood_Density) 
-                + geom_boxplot() 
-                + facet_wrap(facets = ~Family, scale="free"))
+# top families plot: adding x and y axis labels and title
+top_families_plot <- top_families_plot + labs(y = "Density (g/cubic cm)", 
+                      title = "Species with highest wood density" )
+# top families plot: flipping axis labels
+top_families_plot <- top_families_plot + theme(axis.text.x = element_text(face="bold", color="#000000", 
+                                     size=8, angle=50),
+          axis.text.y = element_text(face="bold", color="#000000", 
+                                     size=8, angle=40))
+#top families plot: changing y limits so that graph is easier to read
+top_families_plot <- top_families_plot + scale_y_continuous(limits=c(0.75, 1.00) )
+top_families_plot
 
+# making a boxplot of most dense species
+bottom_families_plot <- ggplot(least_dense, aes(x = Family, y = Wood_Density, color = Family)) + 
+  geom_boxplot() 
 
-        
+# bottom families plot: adding x and y axis labels and title
+bottom_families_plot <- bottom_families_plot + labs(y = "Density (g/cubic cm)", 
+                                              title = "Species with lowest wood density" )
+# bottom families plot: rotating x and y axis labels and changing text size
+bottom_families_plot <- bottom_families_plot + theme(axis.text.x = element_text(face="bold", color="#000000", 
+                                                     size=8, angle=50),
+                          axis.text.y = element_text(face="bold", color="#000000", 
+                                                     size=8, angle=40))
+# changing y axis limits so that graph displays better
+bottom_families_plot <- bottom_families_plot + scale_y_continuous(limits=c(0.195, 0.32))
+bottom_families_plot
