@@ -7,6 +7,7 @@
 library("ggplot2")
 library("tidyverse")
 install.packages("dplyr")
+install.packages("ggpubr")
 
 # -- Setting working directory for image saving purposes
 setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/Labs/FinalProj_Work")
@@ -46,14 +47,14 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/Labs/FinalProj_Work"
   avg_biomass_grouped_plot
   dev.off()
   
-# ------ Note for data in part 1: Insect biomass data was not recorded in the years 2002 or 1996. Therefore, associated agricultural data must be adjusted to delete these values. 
-  missing <- c(1996,2002) # missing years
+# ------ Note for data in part 1: Insect biomass data was not recorded in the years 2002, 1998, or 1996. Therefore, associated agricultural data must be adjusted to delete these values. 
+  missing <- c(1996,1998,2002) # missing years
 # -- Pt 1.2: Making a plot of cereal yield per hectare
 #
 # loading in cereal per hectare data
  cereal_per_hectare <-  read.csv("/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/Labs/FinalProj_Work/cereal_yield_per_hectare.csv")
 # removing data from missing years
-  missing_cereal_yr <- which(cereal_per_hectare$Year == missing[1] | cereal_per_hectare$Year == missing[2])
+  missing_cereal_yr <- which(cereal_per_hectare$Year == missing[1] | cereal_per_hectare$Year == missing[2] | cereal_per_hectare$Year == missing[3])
   cereal_per_hectare <- cereal_per_hectare[-missing_cereal_yr, ]
 
 # plot of cereal production (kg per hectare) for 1989-2016 (excl. 2002 and 1996)
@@ -82,7 +83,7 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/Labs/FinalProj_Work"
 
   percent_agricultural_area <-  read.csv("/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/Labs/FinalProj_Work/land_use_percentages.csv")
 
-  missing_area_yr <- which(percent_agricultural_area$Year == missing[1] | percent_agricultural_area$Year == missing[2])
+  missing_area_yr <- which(percent_agricultural_area$Year == missing[1] | percent_agricultural_area$Year == missing[2] | percent_agricultural_area$Year == missing[3])
   percent_agricultural_area <- percent_agricultural_area[-missing_area_yr, ]
   
   agricultural_area_plot <- ggplot(percent_agricultural_area, aes(x = Year, y = X..Land.usage, color = Year)) + 
@@ -94,17 +95,25 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/Labs/FinalProj_Work"
   dev.off()
   
 # -- Pt 1.4: comparison of plots
-  
+  cereal_production_vs_biomass <- cor.test(cereal_per_hectare$Crop.production..kg.hectare., avg_year_Biomass_grouped$byYear_meanBiomass, method = c("pearson"))
+    # NOTE: This test shows a p-value of 0.03209, 95% confidence interval of (-0.70505480 -0.04152613), cor of -0.4296079
+  ag_area_vs_biomass <- cor.test(percent_agricultural_area$X..Land.usage, avg_year_Biomass_grouped$byYear_meanBiomass, method = c("pearson"))
+    # NOTE: Likely no correlation; high p-value of 0.2198
+  ag_area_vs_cereal_production <- cor.test(percent_agricultural_area$X..Land.usage, cereal_per_hectare$Crop.production..kg.hectare., method = c("pearson"))
+    # NOTE: Very high correlation; p value 8.1e^-5. Shows relationship between increasing cereal production and decreasing agricultural area. 
+
 # -- Pt 1.5: statistical analysis of plots
 
 # -- Pt 1.6: Statistical anomalies (high biomass years) vs. cereal production trends
   
+  cereal_by_production_quantity <- arrange(cereal_per_hectare, Crop.production..kg.hectare.) 
+  insectBiomass_by_mass <- arrange(avg_year_Biomass_grouped, byYear_meanBiomass) 
+  agArea_by_percent <- arrange(percent_agricultural_area, X..Land.usage) 
+  
+  
 # -- Pt 2.1: making plots of temperature data for given timeframe
-
-# -- Pt 2.2: comparing temperature trends to biomass trends
   
   init_weather_data <- read.csv("/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/Labs/FinalProj_Work/pone_data_s2.csv")
-  head(init_weather_data)  
   
   naRow_weather <- which(is.na(init_weather_data$temperature))
   init_weather_data <- init_weather_data[-naRow_weather, ]
@@ -131,4 +140,12 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/Labs/FinalProj_Work"
   mean_temperature_plot <-  mean_temperature_plot + scale_x_continuous(breaks = round(seq(min(avg_year_Temperature_grouped$year), max(avg_year_Temperature_grouped$year), by = 1),1)) 
   #x axis font and angle modification  
   mean_temperature_plot <- mean_temperature_plot+ theme(axis.text.x = element_text(color="#000000", size=9, angle=40))
+  
+  mean_temperature_plot
+  # -- Pt 2.2: comparing temperature trends to biomass trends
+  temp_mean_vs_biomass <- cor.test(avg_year_Temperature_grouped$byYear_meanTemperature, avg_year_Biomass_grouped$byYear_meanBiomass, method = c("pearson"))
+  
+
+  temp_by_avg <- arrange(avg_year_Temperature_grouped, byYear_meanTemperature) 
+  
   
