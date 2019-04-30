@@ -170,7 +170,7 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/FinalProject/Assignm
   all_plots_combined
   dev.off()
 
-# --- part 1.7: correlation plot production
+# --- part 2.1: correlation plot production
 
   names_corr_data <- c("Biomass", "Temperature", "Cereal Production", "Ag. Area")
   all_corr_data <- cbind(avg_year_Biomass_grouped$byYear_meanBiomass, avg_year_Temperature_grouped$byYear_meanTemperature, cereal_per_hectare$Crop.production..kg.hectare., percent_agricultural_area$X..Land.usage)
@@ -277,7 +277,7 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/FinalProject/Assignm
   all_outlier_plots_combined <- ggarrange(top_bottom_biomass_area_plot, top_bottom_biomass_cereal_plot, top_bottom_biomass_temp_plot)
   all_outlier_plots_combined
 # saving image
-  png(filename="Figure9_biomass_and_temp_outlier_years.png", width = 800, height = 698)
+  png(filename="Figure3_all_topBottom_plots", width = 800, height = 698)
   all_outlier_plots_combined
   dev.off()
   
