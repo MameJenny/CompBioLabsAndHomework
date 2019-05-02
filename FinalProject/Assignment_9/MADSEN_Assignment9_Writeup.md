@@ -45,7 +45,7 @@ To accomplish my third goal, I made use of the packages ggplot2, Hmisc, and corr
 ## Results and Conclusions
 ### Results 
 The general trends for temperature, insect biomass, cereal yield, and agricultural percent area are summarized below: 
-![All scatterplots](/Figure1_all_trend_plots.png)
+![All scatterplots](Figure1_all_trend_plots.png)
 
 > Fig. 1. General trends of insect biomass, agricultural area, mean
 > temperature, and cereal production per hectare.
@@ -79,7 +79,7 @@ For a variable to cause insect biomass to decrease, a negative correlation would
 These correlation tests imply that cereal crop production has significantly increased despite agricultural land usage declining since 1989. Meanwhile, insect populations have declined inverse to crop production. Temperature is weakly positively correlated with biomass, and negatively correlated with the agricultural variables. 
 
 Another consideration was the fact that biomass saw large spikes and declines in several years across the 27-year period. As implied by Benton et al. (2002),  insect population loss could be seen either the year of intensified agricultural activity or a year after. To analyze this phenomena, the top and bottom five years for insect biomass were compared against the highest and lowest recordings for each of the other three variables. These results are summarized below: 
-![All outlier plots](/Figure3_all_top_bottom_plots.png)
+![All outlier plots](Figure3_all_topBottom_plots.png)
 
 > Fig. 3. For the plots above, the highest and lowest values for each
 > variable were plotted. Position on the graph is relative to ranking
