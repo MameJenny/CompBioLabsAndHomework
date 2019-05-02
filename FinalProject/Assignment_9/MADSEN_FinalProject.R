@@ -51,7 +51,7 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/FinalProject/Assignm
   avg_biomass_grouped_plot <-  avg_biomass_grouped_plot + scale_y_continuous(breaks = round(seq(min(avg_year_Biomass_grouped$byYear_meanBiomass), max(avg_year_Biomass_grouped$byYear_meanBiomass), by = 10),1)) 
   
 #x axis font and angle modification  
-  avg_biomass_grouped_plot <- avg_biomass_grouped_plot + theme(axis.text.x = element_text(color="#000000", size=9, angle=90))
+  avg_biomass_grouped_plot <- avg_biomass_grouped_plot + theme(axis.text.x = element_text(color="#000000", size=9, angle=90, face="bold"))
   avg_biomass_grouped_plot
   
 # saving image  
@@ -82,7 +82,7 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/FinalProject/Assignm
   cereal_hectare_plot <-  cereal_hectare_plot + scale_y_continuous(breaks = round(seq(min(cereal_per_hectare$Crop.production..kg.hectare.), max(cereal_per_hectare$Crop.production..kg.hectare.), by = 500),1)) 
   
 # x axis font and angle modification  
-  cereal_hectare_plot <- cereal_hectare_plot + theme(axis.text.x = element_text(color="#000000", size=9, angle=90))
+  cereal_hectare_plot <- cereal_hectare_plot + theme(axis.text.x = element_text(color="#000000", size=9, angle=90, face="bold"))
   cereal_hectare_plot                                                                                                                                                                 
 # saving image of plot for use in markdown document                                                                                                                                                                    
   png(filename="cereal_production_kgPerhectare.png")
@@ -107,7 +107,7 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/FinalProject/Assignm
   agricultural_area_plot <-  agricultural_area_plot + scale_y_continuous(breaks = round(seq(min(percent_agricultural_area$X..Land.usage), max(percent_agricultural_area$X..Land.usage), by = 1),1)) 
   
 # x axis font and angle modification  
-  agricultural_area_plot <- agricultural_area_plot + theme(axis.text.x = element_text(color="#000000", size=9, angle=90))
+  agricultural_area_plot <- agricultural_area_plot + theme(axis.text.x = element_text(color="#000000", size=9, angle=90, face="bold"))
   agricultural_area_plot
 # saving image of agricultural percent use trend plot
   png(filename="agricultural_percent_use.png")
@@ -151,7 +151,7 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/FinalProject/Assignm
   mean_temperature_plot <-  mean_temperature_plot + scale_x_continuous(breaks = round(seq(min(avg_year_Temperature_grouped$year), max(avg_year_Temperature_grouped$year), by = 1),1)) 
   mean_temperature_plot <-  mean_temperature_plot + scale_y_continuous(breaks = round(seq(min(avg_year_Temperature_grouped$byYear_meanTemperature), max(avg_year_Temperature_grouped$byYear_meanTemperature), by = 1),1)) 
 # x axis font and angle modification  
-  mean_temperature_plot <- mean_temperature_plot+ theme(axis.text.x = element_text(color="#000000", size=9, angle=90))
+  mean_temperature_plot <- mean_temperature_plot + theme(axis.text.x = element_text(color="#000000", size=9, angle=90, face="bold"))
   mean_temperature_plot
   
   png(filename="mean_temperature_byYear.png")
@@ -161,13 +161,11 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/FinalProject/Assignm
   temp_mean_vs_biomass <- cor.test(avg_year_Temperature_grouped$byYear_meanTemperature, avg_year_Biomass_grouped$byYear_meanBiomass, method = c("pearson"))
   # -- NOTE: High p-value of 0.6206; if other variables have higher correlation, they should be below this value (and <0.05)
 
-# combining all plots for viewability   
-  all_plots_combined <- ggarrange(agricultural_area_plot, avg_biomass_grouped_plot, cereal_hectare_plot, mean_temperature_plot, 
-                                  labels = c("A", "B", "C", "D"),
-                                  ncol = 2, nrow = 2)
-# saving image
-  png(filename="Figure1_all_trend_plots.png")
-  all_plots_combined
+# combining all plots for viewability, saving image
+  png(filename="Figure1_all_trend_plots.png", width = 1300, height = 1100)
+  ggarrange(agricultural_area_plot, avg_biomass_grouped_plot, cereal_hectare_plot, mean_temperature_plot, 
+                               labels = c("A", "B", "C", "D"),
+                               ncol = 2, nrow = 2)
   dev.off()
 
 # --- part 2.1: correlation plot production
@@ -180,13 +178,10 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/FinalProject/Assignm
   all_corr_data <- as.matrix(all_corr_data)
 # converting all data values to correlation matrix values of 2 to -2 for correlogram construction
   corr_data_for_correlogram <- cor(all_corr_data)
-# making correlogram
-  correlogram <- corrplot(corr_data_for_correlogram, type = "upper",  
+# making correlogram, saving correlogram image
+  png(filename="Figure2_correlogram.png", height=800, width=800)
+  corrplot(corr_data_for_correlogram, type = "upper",  
                           tl.col = "black", tl.srt = 45)
-  correlogram
-# saving correlogram image
-  png(filename="Figure2_correlogram.png")
-  correlogram
   dev.off()
   
 # -- PART 3.1: Comparing outliers (highest and lowest years of each variable) to biomass
@@ -230,7 +225,7 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/FinalProject/Assignm
     theme(axis.title.y = element_blank(), # removing y axis labels
           axis.ticks.y = element_blank(), 
           axis.line.y = element_blank(), 
-          axis.text.x = element_text(color="#000000", size=9, angle=90)) +
+          axis.text.x = element_text(color="#000000", size=9, angle=90, face="bold")) +
     labs( title = "Top and Bottom Cereal/Biomass Years")
           
 # saving image    
@@ -249,7 +244,7 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/FinalProject/Assignm
     theme(axis.title.y = element_blank(), # removing y axis labels
           axis.ticks.y = element_blank(), 
           axis.line.y = element_blank(), 
-          axis.text.x = element_text(color="#000000", size=9, angle=90)) +
+          axis.text.x = element_text(color="#000000", size=9, angle=90, face="bold")) +
     labs( title = "Top and Bottom Agricultural Area/Biomass Years")
  # saving image
   png(filename="biomass_and_area_outlier_years.png", width = 800, height = 698)
@@ -267,18 +262,15 @@ setwd("C:/Users/Mame/Desktop/CompBio/CompBioLabsAndHomework/FinalProject/Assignm
     theme(axis.title.y = element_blank(), # removing y axis labels
           axis.ticks.y = element_blank(), 
           axis.line.y = element_blank(), 
-          axis.text.x = element_text(color="#000000", size=9, angle=90)) +
+          axis.text.x = element_text(color="#000000", size=9, angle=90, face="bold")) +
     labs( title = "Top and Bottom Temperature/Biomass Years")
  # saving image
   png(filename="Figure3_biomass_and_temp_outlier_years.png", width = 800, height = 698)
   top_bottom_biomass_area_plot
   dev.off()
-# making a grouped plot of all above top/bottom variable plots
-  all_outlier_plots_combined <- ggarrange(top_bottom_biomass_area_plot, top_bottom_biomass_cereal_plot, top_bottom_biomass_temp_plot)
-  all_outlier_plots_combined
-# saving image
-  png(filename="Figure3_all_topBottom_plots", width = 800, height = 698)
-  all_outlier_plots_combined
+# making a grouped plot of all above top/bottom variable plots, saving image
+  png(filename="Figure3_all_topBottom_plots.png", width = 1300, height = 1100)
+  ggarrange(top_bottom_biomass_area_plot, top_bottom_biomass_cereal_plot, top_bottom_biomass_temp_plot)
   dev.off()
   
   
