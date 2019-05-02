@@ -3,7 +3,7 @@
 Is there a correlation between increased agricultural area or farming practices and observed decline in insect populations? 
 
 ## Context
-Around the world, flying insect populations have declined significantly in the past several decades. This decline has potentially far-reaching effects on ecosystems, since flying insects are the foundation of most terrestrial food webs and pollinators of many agricultural species. Increased agriculture and the issues that come with it, such as habitat destruction and loss of plant diversity, are a potential cause of this decline (Benton et al. 2016, 671-673).
+Around the world, flying insect populations have declined significantly in the past several decades. This decline has potentially far-reaching effects on ecosystems, since flying insects are the foundation of most terrestrial food webs and are pollinators of many agricultural species. Increased agriculture and the issues that come with it, such as habitat destruction and loss of plant diversity, are a potential cause of this decline (Benton et al. 2016, 671-673).
 
 From 1989 to 2016, German scientists recorded insect biomass readings in protected nature areas. Their headline-reaching study showed that insect populations dropped 76% over the course of the study (Hallmann et al. 2016, 14-18). 
 ## Methods
@@ -12,7 +12,7 @@ Insect biomass and temperature data were retrieved from the study "More than 75 
 
 Insect biomass data can be directly accessed at the above study's [S1 dataset](https://doi.org/10.1371/journal.pone.0185809.s004). Temperature data is available in the study's [S2 dataset](https://doi.org/10.1371/journal.pone.0185809.s005). 
 
-Agricultural percent use data were sourced from [The World Bank's publicly available data]([https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?end=2016&locations=DE&start=1989](https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?end=2016&locations=DE&start=1989)). Cereal production per hectare data are also available from [The World Bank's archives.](https://data.worldbank.org/indicator/AG.CON.FERT.ZS?locations=DE&view=chart)
+Agricultural percent use data were sourced from [The World Bank's publicly available data]([https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?end=2016&locations=DE&start=1989](https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?end=2016&locations=DE&start=1989)). Cereal production per hectare data are also available from [The World Bank's archives.](https://data.worldbank.org/indicator/AG.CON.FERT.ZS?locations=DE&view=chart) . 
 
 #### How the Data were Produced
 
@@ -20,9 +20,9 @@ From 1989 to 2016, German ecologists conducted a study to measure change in inse
 
 Insect biomass was measured using specialized “malaise” traps; the collected flying insects were regularly collected, weighed, and recorded. These data were recorded in the  [S1 dataset](https://doi.org/10.1371/journal.pone.0185809.s004). Since changes in climate and weather conditions were suspected to correlate with population decline, several weather-related factors at the field locations were compared to the trends in insect biomass. These data were sourced from local weather stations in Germany. Temperature and weather data is available in the  [S2 dataset](https://doi.org/10.1371/journal.pone.0185809.s005). 
 
-Agricultural data obtained from the World Bank is collected and compiled from local governments around the world with World Bank offices. Compiled data for the 27-year study period is available in my analysis' git repository at the following links: 
+Agricultural data obtained from the World Bank is collected and compiled from local governments around the world in countries with World Bank offices. Compiled data for the 27-year study period is available in my analysis' git repository at the following links: [Cereal production per hectare](/cereal_yield_per_hectare.csv) and [Agricultural percent area](/land_use_percentages.csv). Full worldwide archives are available in the previous section's links. 
 
-The S1 dataset is 109 KB in size and 1513 lines long. The S2 dataset is 2.18 MB in size and 16909 lines long. There were no major issues working with the data that were specifically related to the size of the files. 
+The S1 dataset is 109 KB in size and 1513 lines long. The S2 dataset is 2.18 MB in size and 16,909 lines long. The two agricultural data sets are under 400 bytes and 29 lines long. There were no major issues working with the data that were specifically related to the size of the files. 
 
 #### What the Original Authors Did with the Data
 The original authors ran a JAGS test using R and used values including R2 and standard deviation to determine the correlation between insect biomass and a list of weather-related variables. In addition to the temperature data I used in my analysis, the original authors also studied precipitation, wind speed, pH, and local plant species diversity. 
@@ -41,11 +41,11 @@ The two external agricultural data sets that biomass was compared to (agricultur
 
 To accomplish my second goal, I performed Pearson correlation tests on the biologically relevant data pairs using the aforementioned formatted data sets.
 
-To accomplish my third goal, I made use of the packages ggplot2, Hmisc, and corrplot. I used ggplot2 to graph each data set as a scatterplot with a trendline. I used Hmisc and corrplot to visualize the correlation found between each set of variables with a correlogram. Finally, I took the highest and lowest recorded years for biomass and compared them to the most extreme years for each other variable to check for trends regarding extremes. 
+To accomplish my third goal, I made use of the packages ggplot2, Hmisc, and corrplot. I used ggplot2 to graph each data set as a scatterplot with a trendline. I used Hmisc and corrplot to visualize the correlation found between each set of variables with a correlogram. Finally, I took the highest and lowest recorded years for biomass and compared them to the most extreme years for each other variable (temperature, agricultural area, and cereal production) to check for trends regarding extremes. 
 ## Results and Conclusions
 ### Results 
 The general trends for temperature, insect biomass, cereal yield, and agricultural percent area are summarized below: 
-![All scatterplots](https://i.imgur.com/UEGwSfo.png)
+![All scatterplots](/Figure1_all_trend_plots.png)
 
 > Fig. 1. General trends of insect biomass, agricultural area, mean
 > temperature, and cereal production per hectare.
@@ -66,7 +66,7 @@ P values for Pearson correlation tests of these variables had the following valu
 In Pearson correlation tests, a p-value under 0.05 indicates that the null hypothesis can be rejected, and the analysis is thus statistically significant. As anticipated, the p-value for temperature/biomass was well above 0.05. Agricultural area/biomass was also above 0.05, and these factors are not related; this defies initial expectations. Cereal production/biomass _**are**_ correlated, with a p value of 0.0321. Likewise, cereal production/agricultural area are correlated with a small p-value of 0.0000819. 
 
 These results are visually summarized in the following correlogram: 
-![Correlogram](https://i.imgur.com/ANYqoKp.png)
+![Correlogram](Figure2_correlogram.png)
 
 > Fig. 2. A plot of correlation between each variable tested (biomass,
 > cereal production, temperature, agricultural percent area). A  blue
@@ -79,7 +79,7 @@ For a variable to cause insect biomass to decrease, a negative correlation would
 These correlation tests imply that cereal crop production has significantly increased despite agricultural land usage declining since 1989. Meanwhile, insect populations have declined inverse to crop production. Temperature is weakly positively correlated with biomass, and negatively correlated with the agricultural variables. 
 
 Another consideration was the fact that biomass saw large spikes and declines in several years across the 27-year period. As implied by Benton et al. (2002),  insect population loss could be seen either the year of intensified agricultural activity or a year after. To analyze this phenomena, the top and bottom five years for insect biomass were compared against the highest and lowest recordings for each of the other three variables. These results are summarized below: 
-![All outlier plots](https://i.imgur.com/0qquWe8.png)
+![All outlier plots](/Figure3_all_top_bottom_plots.png)
 
 > Fig. 3. For the plots above, the highest and lowest values for each
 > variable were plotted. Position on the graph is relative to ranking
