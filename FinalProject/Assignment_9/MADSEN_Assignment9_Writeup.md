@@ -10,9 +10,9 @@ From 1989 to 2016, German scientists recorded insect biomass readings in protect
 #### Source of the Data
 Insect biomass and temperature data were retrieved from the study "More than 75 percent decline over 27 years in total flying insect biomass in protected areas," published in the journal PLOS in 2016. This publication is open source and can be accessed at  [the PLOS website.](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0185809)
 
-Insect biomass data can be directly accessed at the above study's [S1 dataset](https://doi.org/10.1371/journal.pone.0185809.s004). Temperature data is available in the study's [S2 dataset](https://doi.org/10.1371/journal.pone.0185809.s005). 
+Insect biomass data can be directly accessed at the above study's [S1 dataset](https://doi.org/10.1371/journal.pone.0185809.s004). Temperature data is available in the study's [S2 dataset](https://doi.org/10.1371/journal.pone.0185809.s005) as of May 1st, 2019.
 
-Agricultural percent use data were sourced from [The World Bank's publicly available data]([https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?end=2016&locations=DE&start=1989](https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?end=2016&locations=DE&start=1989)). Cereal production per hectare data are also available from [The World Bank's archives.](https://data.worldbank.org/indicator/AG.CON.FERT.ZS?locations=DE&view=chart) . 
+Agricultural percent use data were sourced from [The World Bank's publicly available data]([https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?end=2016&locations=DE&start=1989](https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?end=2016&locations=DE&start=1989)). Cereal production per hectare data are also available from [The World Bank's archives.](https://data.worldbank.org/indicator/AG.CON.FERT.ZS?locations=DE&view=chart) as of May 1st, 2019.
 
 #### How the Data were Produced
 
