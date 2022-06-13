@@ -12,7 +12,7 @@ Insect biomass and temperature data were retrieved from the study "More than 75 
 
 Insect biomass data can be directly accessed at the above study's [S1 dataset](https://doi.org/10.1371/journal.pone.0185809.s004). Temperature data is available in the study's [S2 dataset](https://doi.org/10.1371/journal.pone.0185809.s005) as of May 1st, 2019.
 
-Agricultural percent use data were sourced from [The World Bank's publicly available data]([https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?end=2016&locations=DE&start=1989](https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?end=2016&locations=DE&start=1989)). Cereal production per hectare data are also available from [The World Bank's archives.](https://data.worldbank.org/indicator/AG.CON.FERT.ZS?locations=DE&view=chart) as of May 1st, 2019.
+Agricultural percent use data were sourced from [The World Bank's publicly available data]([https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?end=2016&locations=DE&start=1989](https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?end=2016&locations=DE&start=1989)). Cereal production per hectare data are also available from [The World Bank's archives](https://data.worldbank.org/indicator/AG.CON.FERT.ZS?locations=DE&view=chart) as of May 1st, 2019.
 
 #### How the Original Data were Produced
 
@@ -41,7 +41,7 @@ The two external agricultural data sets compared against biomass, agricultural a
 
 To accomplish the second focal point, Pearson correlation tests were performed on biologically relevant data pairs using the aforementioned formatted data sets. This procedure was selected for its intuitive and broadly understood data output, as well as its potential applicability to the original authors' comparisons. 
 
-To accomplish the third point, data analysis was performed using the packages ggplot2, Hmisc, and corrplot. Ggplot2 was used to simplify the graphing of each data set as a scatterplot with a trendline. Hmisc and corrplot were used to visualize the correlation found between each set of variables with a correlogram; this provides a visually-appealing and intuitive display of correlation p values. Finally, this analysis usedtook the highest and lowest recorded years for biomass and compared them to the most extreme years for each other variable (temperature, agricultural area, and cereal production) to check for trends regarding extremes. 
+To accomplish the third point, data analysis was performed using the packages ggplot2, Hmisc, and corrplot. Ggplot2 was used to simplify the graphing of each data set as a scatterplot with a trendline. Hmisc and corrplot were used to visualize the correlation found between each set of variables with a correlogram; this provides a visually-appealing and intuitive display of correlation p values. Finally, this analysis took the highest and lowest recorded years for biomass and compared them to the most extreme years for each other variable (temperature, agricultural area, and cereal production) to check for trends regarding extremes. 
 ## Results and Conclusions
 ### Results 
 The general trends for temperature, insect biomass, cereal yield, and agricultural percent area are summarized below: 
